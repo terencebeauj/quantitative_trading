@@ -49,10 +49,10 @@ class Organizer():
             same_candle = self.candles_snap.iloc[-1, 0] == candles.iloc[-1, 0]
             if same_candle:
                 candles.dropna(inplace=True)
-                # print("Same candle")
-                # print(candles.iloc[-1,-1])
-                # print(candles.tail())
-                # print("")
+                print("Same candle")
+                print(candles.iloc[-1,-1])
+                print(candles.tail())
+                print("")
             else:
                 print("New candle")
                 self.candles_snap = candles.copy()
