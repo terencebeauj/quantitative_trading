@@ -1,5 +1,6 @@
 import logging
 from exchanges.binance import *
+from data_collector import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -21,4 +22,11 @@ if __name__ == "__main__":
   mode = input("Choost the program mode: data / backtest / optimize: ").lower()
 
   client = BinanceClient(futures=True)
-  print(client.get_historical("BTCUSDT"))
+
+  while True:
+    symbol = input("Choose a symbol: ").upper()
+    if symbol in client.symbols:
+      break
+
+  if mode == "data":
+    collect_all(client, "binance", symbol)

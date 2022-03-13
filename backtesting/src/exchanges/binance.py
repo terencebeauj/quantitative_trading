@@ -12,7 +12,7 @@ class BinanceClient:
     else:
       self._base_url = "https://fapi.binance.com"
     
-    self._get_symbols = self._get_symbols()
+    self.symbols = self._get_symbols()
 
   
   def _make_request(self, endpoint: str, query_parameters: Dict):
@@ -34,7 +34,6 @@ class BinanceClient:
     data = self._make_request(endpoint=endpoint, query_parameters=params)
 
     symbols = [x["symbol"] for x in data["symbols"]]
-    print(symbols)
     return symbols
 
   def get_historical(self, symbol: str, start_time: Optional[int] = None, end_time: Optional[int] = None):
