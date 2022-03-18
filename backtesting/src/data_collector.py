@@ -1,4 +1,3 @@
-from pkgutil import get_data
 from typing import *
 from exchanges.binance import *
 from utils import *
@@ -88,3 +87,19 @@ def collect_all(client: BinanceClient, exchange: str, symbol: str):
   if len(data)!=0:
     h5_db.write_data(symbol, data_to_insert)
     data_to_insert.clear()
+
+def data_validator(exchange: str, symbol: str):
+  db_client = Hdf5Client(exchange=exchange)
+  if symbol not in db_client.hf.keys():
+    logger.warning(f"No data for: {symbol}")
+    return
+    
+  df = db_client.get_data(symbol, 0, time.time() * 1000)
+  
+  print("NaN values per column:")
+  print(df.isna().sum())
+
+  print("")
+
+  print("Missing value (gap) in timestamp:")
+  print((df.index[1:] - df.index[:-1]).value_counts())
