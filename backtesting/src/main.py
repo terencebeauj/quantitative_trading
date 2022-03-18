@@ -19,7 +19,10 @@ logger.addHandler(stream_handler)
 logger.addHandler(file_handler)
 
 if __name__ == "__main__":
-  mode = input("Choost the program mode: data / backtest / optimize: ").lower()
+  while True:
+    mode = input("Choost the program mode: data / backtest: ").lower()
+    if mode in ["data", "backtest"]:
+      break
 
   client = BinanceClient(futures=True)
 
