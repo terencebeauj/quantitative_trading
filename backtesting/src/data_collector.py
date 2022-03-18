@@ -12,10 +12,6 @@ def collect_all(client: BinanceClient, exchange: str, symbol: str):
 
   h5_db = Hdf5Client(exchange)
   h5_db.create_dataset(symbol)
-  data = h5_db.get_data(symbol, 0, time.time() * 1000)
-  data = resample_timeframe(data, "1d")
-  print(data)
-  return
 
   oldest_ts, most_recent_ts = h5_db.get_first_last_timestamp(symbol=symbol)
 
