@@ -56,8 +56,11 @@ def collect_all(client: BinanceClient, exchange: str, symbol: str):
 
     time.sleep(1)
   
-  h5_db.write_data(symbol, data_to_insert)
-  data_to_insert.clear()
+  try:
+    h5_db.write_data(symbol, data_to_insert)
+    data_to_insert.clear()
+  except:
+    pass
 
 
   # Older data
