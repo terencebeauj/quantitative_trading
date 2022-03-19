@@ -13,3 +13,6 @@ def analyzer(symbol):
   
   df = db.get_data(symbol, 0, time.time() * 1000)
   print(f"Number of duplicated lines: {df.duplicated().sum()}")
+
+  print("")
+  print(df.head(30))
