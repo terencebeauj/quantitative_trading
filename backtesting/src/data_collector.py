@@ -87,6 +87,7 @@ def collect_all(client: BinanceClient, exchange: str, symbol: str):
   if len(data)!=0:
     h5_db.write_data(symbol, data_to_insert)
     data_to_insert.clear()
+    
 
 def data_validator(exchange: str, symbol: str):
   db_client = Hdf5Client(exchange=exchange)

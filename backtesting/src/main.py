@@ -1,6 +1,7 @@
 import logging
 from exchanges.binance import *
 from data_collector import collect_all, data_validator
+from analysis import *
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -20,8 +21,8 @@ logger.addHandler(file_handler)
 
 if __name__ == "__main__":
   while True:
-    mode = input("Choost the program mode: data / validator / backtest: ").lower()
-    if mode in ["data", "backtest", "validator"]:
+    mode = input("Choost the program mode: data / validator / analysis / backtest: ").lower()
+    if mode in ["data", "backtest", "validator", "analysis"]:
       break
 
   client = BinanceClient(futures=True)
@@ -36,3 +37,6 @@ if __name__ == "__main__":
   
   if mode == "validator":
     data_validator("binance", symbol)
+  
+  if mode == "analysis":
+    analyzer(symbol)
