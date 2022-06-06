@@ -56,8 +56,11 @@ def collect_all(client: BinanceClient, exchange: str, symbol: str):
 
     time.sleep(1)
   
-  h5_db.write_data(symbol, data_to_insert)
-  data_to_insert.clear()
+  try:
+    h5_db.write_data(symbol, data_to_insert)
+    data_to_insert.clear()
+  except:
+    pass
 
 
   # Older data
@@ -84,9 +87,12 @@ def collect_all(client: BinanceClient, exchange: str, symbol: str):
 
     time.sleep(1.1)
   
-  if len(data)!=0:
+  try:
     h5_db.write_data(symbol, data_to_insert)
     data_to_insert.clear()
+  except:
+    quit()
+    
 
 def data_validator(exchange: str, symbol: str):
   db_client = Hdf5Client(exchange=exchange)

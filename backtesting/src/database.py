@@ -8,7 +8,7 @@ import time
 logger = logging.getLogger()
 
 class Hdf5Client:
-  def __init__(self, exchange) -> None:
+  def __init__(self, exchange="binance") -> None:
       self.hf = h5py.File(f"data/{exchange}.h5", "a")
       self.hf.flush()
 
